@@ -71,7 +71,7 @@ button:hover{
     background:#f0fff6;
     border:2px solid #00a651;
     border-radius:10px;
-    text-align:center;
+    text-align:left;
     display:none;
 }
 
@@ -106,10 +106,10 @@ button:hover{
 <div class="sub">필름 수량 계산기</div>
 
 <label>폭(mm)</label>
-<input type="text" inputmode="numeric" id="width" placeholder="예 : 3530" onkeydown="if (event.keyCode === 13) document.getElementById('height').focus();"  oninput="addComma(this)" autofocus>
+<input type="text" inputmode="numeric" id="width" placeholder="예 : 3,530" onkeydown="if (event.keyCode === 13) document.getElementById('height').focus();"  oninput="addComma(this)" autofocus>
 
 <label>높이(mm)</label>
-<input type="text" inputmode="numeric" id="height" placeholder="예 : 2280" onkeydown="ifif (event.keyCode === 13) calculateFilm();"  oninput="addComma(this)">
+<input type="text" inputmode="numeric" id="height" placeholder="예 : 2,280" onkeydown="if (event.keyCode === 13) calculateFilm();"  oninput="addComma(this)">
 
 <button onclick="calculateFilm()">계산하기</button>
 
@@ -146,8 +146,16 @@ function calculateFilm(){
     const widthCount = Math.ceil(width / 1100);
     const meter = Math.ceil((widthCount * height) / 1000);
 
-    document.getElementById("resultText").innerHTML =
-        "필요 수량 : <strong>" + meter.toLocaleString('ko-KR')  + "M</strong>";
+document.getElementById("resultText").innerHTML =
+    "폭&nbsp;&nbsp;&nbsp;&nbsp;: <strong>" + width.toLocaleString('ko-KR') + "mm</strong><br>" +
+    "높이 : <strong>" + height.toLocaleString('ko-KR') + "mm</strong><br><br>" +
+
+    "<div style='text-align:center;margin-top:15px;'>" +
+        "필요 수량" +
+        "<strong style='color:#00a651;'>" +
+            meter.toLocaleString('ko-KR') + "M" +
+        "</strong>" +
+    "</div>";
 
     document.getElementById("resultBox").style.display = "block";
 	
@@ -160,11 +168,13 @@ function calculateFilm(){
     document.getElementById("width").focus();
 }
 
-
 function addComma(obj) {
-    let value = obj.value.replace(/,/g, '');
-    if (!isNaN(value) && value !== '') {
+    let value = obj.value.replace(/[^0-9]/g, '');
+
+    if (value) {
         obj.value = Number(value).toLocaleString('ko-KR');
+    } else {
+        obj.value = '';
     }
 }
 
