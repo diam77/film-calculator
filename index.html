@@ -106,10 +106,10 @@ button:hover{
 <div class="sub">필름 수량 계산기</div>
 
 <label>폭(mm)</label>
-<input type="number" id="width" placeholder="예 : 3530">
+<input type="text" inputmode="numeric" id="width" placeholder="예 : 3530" onkeydown="if (event.keyCode === 13) document.getElementById('height').focus();"  oninput="addComma(this)" autofocus>
 
 <label>높이(mm)</label>
-<input type="number" id="height" placeholder="예 : 2280">
+<input type="text" inputmode="numeric" id="height" placeholder="예 : 2280" onkeydown="ifif (event.keyCode === 13) calculateFilm();"  oninput="addComma(this)">
 
 <button onclick="calculateFilm()">계산하기</button>
 
@@ -131,8 +131,12 @@ button:hover{
 <script>
 function calculateFilm(){
 
-    const width = parseFloat(document.getElementById("width").value);
-    const height = parseFloat(document.getElementById("height").value);
+    const width = parseFloat(
+		document.getElementById("width").value.replace(/,/g, '')
+	);
+    const height = parseFloat(
+			document.getElementById("height").value.replace(/,/g, '')
+	);
 
     if(!width || !height){
         alert("폭과 높이를 입력해주세요.");
@@ -143,10 +147,28 @@ function calculateFilm(){
     const meter = Math.ceil((widthCount * height) / 1000);
 
     document.getElementById("resultText").innerHTML =
-        "필요 수량 : <strong>" + meter + "M</strong>";
+        "필요 수량 : <strong>" + meter.toLocaleString('ko-KR')  + "M</strong>";
 
     document.getElementById("resultBox").style.display = "block";
+	
+	
+	   // 입력값 초기화
+    document.getElementById("width").value = "";
+    document.getElementById("height").value = "";
+
+    // 폭 입력칸으로 커서 이동
+    document.getElementById("width").focus();
 }
+
+
+function addComma(obj) {
+    let value = obj.value.replace(/,/g, '');
+    if (!isNaN(value) && value !== '') {
+        obj.value = Number(value).toLocaleString('ko-KR');
+    }
+}
+
+
 </script>
 
 </body>
