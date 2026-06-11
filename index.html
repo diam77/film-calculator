@@ -3,139 +3,152 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>필름 수량 계산기</title>
+<title>영림 홈아트 필름 수량 계산기</title>
 
 <style>
-    body {
-        font-family: "맑은 고딕", sans-serif;
-        background: #f5f5f5;
-        margin: 0;
-        padding: 20px;
-    }
+body{
+    margin:0;
+    padding:20px;
+    background:#f5f5f5;
+    font-family:'Malgun Gothic',sans-serif;
+}
 
-    .popup {
-        max-width: 400px;
-        margin: auto;
-        background: #fff;
-        padding: 25px;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-    }
+.container{
+    max-width:500px;
+    margin:auto;
+    background:#ffffff;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
 
-    h2 {
-        text-align: center;
-        margin-top: 0;
-        color: #333;
-    }
+h1{
+    text-align:center;
+    color:#00a651;
+    margin-bottom:5px;
+}
 
-    label {
-        display: block;
-        margin-top: 12px;
-        margin-bottom: 5px;
-        font-weight: bold;
-    }
+.sub{
+    text-align:center;
+    color:#666;
+    margin-bottom:25px;
+}
 
-    input {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ddd;
-        border-radius: 6px;
-        box-sizing: border-box;
-        font-size: 15px;
-    }
+label{
+    font-weight:bold;
+    display:block;
+    margin-bottom:8px;
+}
 
-    button {
-        width: 100%;
-        margin-top: 15px;
-        padding: 12px;
-        background: #00c73c;
-        color: white;
-        border: none;
-        border-radius: 6px;
-        font-size: 16px;
-        cursor: pointer;
-        font-weight: bold;
-    }
+input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    box-sizing:border-box;
+    margin-bottom:15px;
+    font-size:16px;
+}
 
-    button:hover {
-        background: #00b336;
-    }
+button{
+    width:100%;
+    background:#00a651;
+    color:white;
+    border:none;
+    padding:15px;
+    font-size:18px;
+    border-radius:8px;
+    cursor:pointer;
+}
 
-    .result {
-        margin-top: 20px;
-        padding: 15px;
-        background: #f8f9fa;
-        border-radius: 6px;
-        text-align: center;
-        font-size: 22px;
-        font-weight: bold;
-        color: #00c73c;
-    }
+button:hover{
+    background:#008c45;
+}
 
-    .formula {
-        margin-top: 12px;
-        font-size: 12px;
-        color: #888;
-        text-align: center;
-    }
+.result{
+    margin-top:20px;
+    padding:20px;
+    background:#f0fff6;
+    border:2px solid #00a651;
+    border-radius:10px;
+    text-align:center;
+    display:none;
+}
 
-    .notice {
-        margin-top: 15px;
-        padding: 12px;
-        background: #fff8e1;
-        border: 1px solid #ffe082;
-        border-radius: 6px;
-        font-size: 13px;
-        line-height: 1.6;
-        color: #555;
-    }
+.result h2{
+    color:#00a651;
+    margin:0;
+}
+
+.notice{
+    margin-top:20px;
+    padding:15px;
+    background:#fff8e8;
+    border-radius:10px;
+    font-size:14px;
+    line-height:1.7;
+}
+
+.footer{
+    margin-top:15px;
+    text-align:center;
+    color:#888;
+    font-size:12px;
+}
 </style>
 </head>
 
 <body>
 
-<div class="popup">
-    <h2>필름 수량 계산기</h2>
+<div class="container">
 
-    <label>폭 (mm)</label>
-    <input type="number" id="width" placeholder="예 : 3530">
+<h1>영림 홈아트</h1>
+<div class="sub">필름 수량 계산기</div>
 
-    <label>높이 (mm)</label>
-    <input type="number" id="height" placeholder="예 : 2280">
+<label>폭(mm)</label>
+<input type="number" id="width" placeholder="예 : 3530">
 
-    <button onclick="calculateFilm()">계산하기</button>
+<label>높이(mm)</label>
+<input type="number" id="height" placeholder="예 : 2280">
 
-    <div class="result" id="result">
-        필요 수량 : -
-    </div>
+<button onclick="calculateFilm()">계산하기</button>
 
-    <div class="formula">
-        계산식 : 올림((올림(폭 ÷ 1100) × 높이) ÷ 1000)
-    </div>
+<div class="result" id="resultBox">
+    <h2 id="resultText"></h2>
+</div>
 
-    <div class="notice">
-        ※ 계산된 수량은 최소 필요 수량입니다.<br>
-        ※ 시공 여건이나 재단 손실을 고려하여 1~2M 추가 주문을 추천드립니다.
-    </div>
+<div class="notice">
+<b>계산식</b><br>
+올림((올림(폭 ÷ 1100) × 높이) ÷ 1000)
+<br><br>
+※ 계산된 수량은 최소 필요 수량입니다.<br>
+※ 시공 여건이나 재단 손실을 고려하여 1~2M 추가 주문을 추천드립니다.
+</div>
+
+<div class="footer">
+영림 홈아트
+</div>
+
 </div>
 
 <script>
-function calculateFilm() {
+function calculateFilm(){
 
-    const width = Number(document.getElementById('width').value);
-    const height = Number(document.getElementById('height').value);
+    const width = parseFloat(document.getElementById("width").value);
+    const height = parseFloat(document.getElementById("height").value);
 
-    if (!width || !height) {
-        alert('폭과 높이를 입력해주세요.');
+    if(!width || !height){
+        alert("폭과 높이를 입력해주세요.");
         return;
     }
 
-    // 영림 홈아트 계산식
     const widthCount = Math.ceil(width / 1100);
     const meter = Math.ceil((widthCount * height) / 1000);
 
-    document.getElementById('result').innerHTML =
-        '필요 수량 : ' + meter + 'M';
+    document.getElementById("resultText").innerHTML =
+        "필요 수량 : <strong>" + meter + "M</strong>";
+
+    document.getElementById("resultBox").style.display = "block";
 }
 </script>
 
